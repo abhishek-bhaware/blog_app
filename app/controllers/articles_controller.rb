@@ -38,6 +38,32 @@ class ArticlesController < ApplicationController
         @articles = Article.all
     end
 
+    def edit 
+        @article = Article.find(params[:id])
+    end
+
+    def update 
+        @article = Article.find(params[:id])
+
+        if @article.update(article_params)
+            flash[:notice] = "Article was successfully updated"
+            # puts "#{flash}"
+            redirect_to article_path(@article)
+        else
+            render 'edit'
+        end
+    end
+
+    def destroy
+        @article = Article.find(params[:id])
+        @article.destroy
+        flash[:notice] = "Article was successfully deleted"
+        puts "I was here for"
+        #redirect_to article_path
+    end
+
+
+
     private 
     #bascially it is returing me a template of object the helps in making a Article object so like article object needs title and description the this will be passed due to the help of that object
     def article_params
