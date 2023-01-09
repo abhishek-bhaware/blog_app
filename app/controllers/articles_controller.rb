@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
+
+    before_action :set_article, only: [:edit,:update,:show,:destroy]
+
     def new
        @article = Article.new 
     end
 
     def create 
         # render plain: params[:article].inspect
-        a = article_params[:title]
-        puts "Here is the a = #{a.class}"
+        # a = article_params[:title]
+        # puts "Here is the a = #{a.class}"
         # puts "Here is the b = #{a[:title].class}"
 
         @article = Article.new(article_params)
@@ -17,10 +20,10 @@ class ArticlesController < ApplicationController
         # redirect_to articles_path(@article)
 
         if @article.save
-            puts "here in the if loop"
-            puts (:notice)
+            # puts "here in the if loop"
+            # puts (:notice)
             flash[:notice] = "Article was successfully created"
-            puts "#{flash}"
+            # puts "#{flash}"
             redirect_to article_path(@article)
         else
             render 'new'
@@ -30,7 +33,7 @@ class ArticlesController < ApplicationController
     def show
         # puts "here i am at show --------------"
         # puts "Here is the id #{params[:id]}"
-        @article = Article.find(params[:id])  
+        # @article = Article.find(params[:id])  
         # puts "#{@article} here is the article"
     end
 
@@ -39,11 +42,11 @@ class ArticlesController < ApplicationController
     end
 
     def edit 
-        @article = Article.find(params[:id])
+        # @article = Article.find(params[:id])
     end
 
     def update 
-        @article = Article.find(params[:id])
+        # @article = Article.find(params[:id])
 
         if @article.update(article_params)
             flash[:notice] = "Article was successfully updated"
@@ -55,11 +58,11 @@ class ArticlesController < ApplicationController
     end
 
     def destroy
-        @article = Article.find(params[:id])
+        # @article = Article.find(params[:id])
         @article.destroy
         flash[:notice] = "Article was successfully deleted"
-        puts "I was here for"
-        #redirect_to article_path
+        # puts "I was here for"
+        redirect_to article_path
     end
 
 
@@ -71,4 +74,9 @@ class ArticlesController < ApplicationController
         # puts :article
         params.require(:article).permit(:title, :description)
     end
+
+    def set_article
+        @article = Article.find(params[:id])
+    end
+
 end
