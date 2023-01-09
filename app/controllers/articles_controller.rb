@@ -11,11 +11,28 @@ class ArticlesController < ApplicationController
 
         @article = Article.new(article_params)
         #puts(@article)
-        @article.save
+        # @article.save
 
         #redirect to the show template 
-        redirect_to articles_show(@article)
+        # redirect_to articles_path(@article)
+
+        if @article.save
+            puts "here in the if loop"
+            puts (:notice)
+            flash[:notice] = "Article was successfully created"
+            puts "#{flash}"
+            redirect_to article_path(@article)
+        else
+            render 'new'
+        end
     end 
+
+    def show
+        # puts "here i am at show --------------"
+        # puts "Here is the id #{params[:id]}"
+        @article = Article.find(params[:id])  
+        # puts "#{@article} here is the article"
+    end
 
     private 
     #bascially it is returing me a template of object the helps in making a Article object so like article object needs title and description the this will be passed due to the help of that object
@@ -24,4 +41,7 @@ class ArticlesController < ApplicationController
         puts :article
         params.require(:article).permit(:title, :description)
     end
+
+    
+
 end
