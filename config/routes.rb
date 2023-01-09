@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'demo/hello'
   get 'demo/hello1'
-  get 'demo/youtube '
-  get 'pages#home'
-  get 'about', to: 'pages#about'
+  get 'demo/youtube'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
