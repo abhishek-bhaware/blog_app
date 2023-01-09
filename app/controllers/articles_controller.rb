@@ -34,14 +34,15 @@ class ArticlesController < ApplicationController
         # puts "#{@article} here is the article"
     end
 
+    def index    
+        @articles = Article.all
+    end
+
     private 
     #bascially it is returing me a template of object the helps in making a Article object so like article object needs title and description the this will be passed due to the help of that object
     def article_params
-        puts "in the article_params #{:article}"
-        puts :article
+        # puts "in the article_params #{:article}"
+        # puts :article
         params.require(:article).permit(:title, :description)
     end
-
-    
-
 end
